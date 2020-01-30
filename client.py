@@ -2,7 +2,7 @@ import socket, pickle, json
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-HOST = gethostname()
+HOST = socket.gethostname()
 PORT = 1235
 
 client_socket.connect((HOST, PORT))
