@@ -6,11 +6,11 @@ from user import User
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
-HOST = socket.gethostname()
+HOST = "127.0.0.1"
 PORT = 1235
 
 server_socket.bind((HOST, PORT))
-server_socket.listen(5)
+server_socket.listen()
 
 _users = set()
 clients_lock = threading.Lock()
@@ -34,9 +34,10 @@ def client_thread(client_socket, ip, port, _data):
 
             if _data != user_file:
                 with open("./files/" + filename + ".json", 'w+') as file:
-                    json.dump(user_file, file)
+                    file.write(user_file)
                         
                     file_to_send = pickle.dumps(user_file)
+                    print(user_file)
                     with clients_lock:
                         for user in _users:
                             if user.file == filename:
