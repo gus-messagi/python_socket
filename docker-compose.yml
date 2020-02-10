@@ -1,0 +1,12 @@
+version: "3.7"
+services: 
+    web:
+        build: .
+        ports:
+            - "1235:1235"
+        command: python server.py
+        volumes:
+            - data-volume:/usr/src/app/files
+volumes: 
+    data-volume:
+        name: python-socket-volume
